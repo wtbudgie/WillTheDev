@@ -49,7 +49,7 @@ const Home: NextPage = () => {
           <br />
 
           <div className="ml-20">
-            <h2 className="text-6xl font-bold tracking-tight text-white">
+            <h2 className="ml-20 text-6xl font-bold tracking-tight text-white">
               Projects
             </h2>
           </div>
