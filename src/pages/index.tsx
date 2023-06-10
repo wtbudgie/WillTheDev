@@ -1,6 +1,8 @@
 import { NextPage } from "next";
 import { FaDiscord, FaGithub } from "react-icons/fa";
 import Head from "next/head";
+import { TailwindCss, Nodejs } from "@styled-icons/boxicons-logos";
+import { Nextdotjs, Typescript, Mongodb } from "@styled-icons/simple-icons";
 
 const Home: NextPage = () => {
   return (
@@ -47,6 +49,33 @@ const Home: NextPage = () => {
               Discord 
               <FaDiscord fontSize={"20px"} />
             </a>
+          </div>
+
+          <div className="mt-24">
+            <div className="space-x-between flex w-screen max-w-screen-xl items-center justify-between pl-4 pr-4">
+              <TailwindCss
+                className="inline-flex max-h-[96px] max-w-[96px] items-center"
+                style={{
+                  color: "#FF6B6B",
+                }}
+              />
+              <Nextdotjs
+                className="inline-flex max-h-[96px] max-w-[96px] items-center"
+                style={{ color: "#6B73FF" }}
+              />
+              <Nodejs
+                className="inline-flex max-h-[96px] max-w-[96px] items-center"
+                style={{ color: "#68A063" }}
+              />
+              <Typescript
+                className="inline-flex max-h-[96px] max-w-[96px] items-center"
+                style={{ color: "#3178C6" }}
+              />
+              <Mongodb
+                className="inline-flex max-h-[96px] max-w-[96px] items-center"
+                style={{ color: "#589636" }}
+              />
+            </div>
           </div>
 
           <div className="mb-5 mt-28">
