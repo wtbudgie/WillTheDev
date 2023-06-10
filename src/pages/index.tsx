@@ -20,7 +20,7 @@ const Home: NextPage = () => {
               </span>
             </h2>
             <p className="mt-6 text-lg leading-8 text-gray-300">
-              Nice to meet you, I'm a self-taught programmer in the fields of
+              Nice to meet you, I'm a programmer in the fields of
               <span className="highlightOrange"> Javascript</span>,
               <span className="highlightOrange"> Typescript</span>, and
               <span className="highlightOrange"> C#</span>. I'm constantly
