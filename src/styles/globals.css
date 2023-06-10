@@ -4,4 +4,41 @@
 
 html {
   background-color: #111827;
+  font-family: Menlo, Monaco, "Courier New", monospace;
+}
+
+.blinkText {
+  display: inline-block;
+  color: #fff;
+}
+
+.blinkBlock {
+  margin-left: 3px;
+  display: inline-block;
+  width: 5px;
+  height: 55px;
+  background-color: #fff;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0% {
+    background-color: #fff;
+  }
+  50% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: #fff;
+  }
+}
+
+.highlightOrange {
+  color: #ff9800;
+  font-weight: bold;
+}
+
+.highlightAqua {
+  color: #2196f3;
+  font-weight: bold;
 }

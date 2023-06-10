@@ -1,4 +1,4 @@
-import { type NextPage } from "next";
+import { NextPage } from "next";
 import { FaDiscord, FaGithub } from "react-icons/fa";
 import Head from "next/head";
 
@@ -10,54 +10,55 @@ const Home: NextPage = () => {
         <meta name="description" content="WillTheDev's official website!" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex min-h-screen flex-col bg-gradient-to-b from-[#2e026d] to-[#15162c]">
-        <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="mx-auto max-w-2xl lg:mx-0">
-              <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
-                👋 Hi, I'm Will.
-              </h2>
-              <p className="mt-6 text-lg leading-8 text-gray-300">
-                Nice to meet you, I'm a self-taught programmer in the fields of
-                Javascript, Typescript, and C#. I'm constantly learning new
-                innovations and coding practices, while constantly being open to
-                paid comissions.
-              </p>
-            </div>
-            <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
-              <div className="grid grid-cols-1 gap-x-8 gap-y-6 text-base font-semibold leading-7 text-white sm:grid-cols-2 md:flex lg:gap-x-10">
-                <a
-                  href="https://github.com/wtbudgie"
-                  className="inline-flex items-center rounded border-b-4 border-blue-700 bg-blue-500 px-4 py-2 font-bold text-white transition hover:border-blue-500 hover:bg-blue-400"
-                >
-                  GitHub 
-                  <FaGithub />
-                </a>
-                <a
-                  href="https://willthedev.com/discord"
-                  className="inline-flex items-center rounded border-b-4 border-blue-700 bg-blue-500 px-4 py-2 font-bold text-white transition hover:border-blue-500 hover:bg-blue-400"
-                >
-                  Discord 
-                  <FaDiscord fontSize={"20px"} />
-                </a>
-              </div>
-            </div>
+      <main className="flex min-h-screen flex-col">
+        <div className="mx-auto mt-10 max-w-7xl px-6 sm:mt-10 lg:mt-24 lg:px-8">
+          <div className="mx-auto max-w-2xl lg:mx-0">
+            <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
+              willthedev
+              <span className="blinkText">
+                <div className="blinkBlock"> </div>
+              </span>
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-gray-300">
+              Nice to meet you, I'm a self-taught programmer in the fields of
+              <span className="highlightOrange"> Javascript</span>,
+              <span className="highlightOrange"> Typescript</span>, and
+              <span className="highlightOrange"> C#</span>. I'm constantly
+              learning
+              <span className="highlightAqua"> new innovations</span> and
+              <span className="highlightAqua"> coding practices</span>, while
+              constantly being open to
+              <span className="highlightAqua"> paid commissions</span>.
+            </p>
           </div>
 
-          <br />
-          <br />
-          <br />
+          <div className="mt-10 grid grid-cols-1 gap-x-8 gap-y-6 text-base font-semibold leading-7 text-white sm:grid-cols-2 sm:grid-cols-2 md:flex lg:gap-x-10">
+            <a
+              href="https://github.com/wtbudgie"
+              className="inline-flex items-center rounded border-b-4 border-blue-700 bg-blue-500 px-4 py-2 font-bold text-white transition hover:border-blue-500 hover:bg-blue-400"
+            >
+              GitHub 
+              <FaGithub />
+            </a>
+            <a
+              href="https://willthedev.com/discord"
+              className="inline-flex items-center rounded border-b-4 border-blue-700 bg-blue-500 px-4 py-2 font-bold text-white transition hover:border-blue-500 hover:bg-blue-400"
+            >
+              Discord 
+              <FaDiscord fontSize={"20px"} />
+            </a>
+          </div>
 
-          <div className="ml-20">
-            <h2 className="ml-20 text-6xl font-bold tracking-tight text-white">
+          <div className="mb-5 mt-28">
+            <h2 className="text-5xl font-bold tracking-tight text-white">
               Projects
             </h2>
+            <p className="text-1xl tracking-tight text-gray-400">
+              past and present
+            </p>
           </div>
-          <br />
-          <div
-            className="grid grid-cols-2 gap-10"
-            style={{ paddingLeft: "250px", paddingRight: "250px" }}
-          >
+
+          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 sm:grid-cols-2">
             <div className="flex justify-center">
               <div
                 className="max-w-md overflow-hidden rounded shadow-lg"
@@ -102,7 +103,7 @@ const Home: NextPage = () => {
                     BudgieBot
                   </div>
                   <p className="text-base text-gray-400">
-                    A MultiPurpose discord bot that can fullfill all of your
+                    A MultiPurpose discord bot that can fulfill all of your
                     server's needs. With User Management, Moderation, and
                     Utility features.
                   </p>
@@ -118,6 +119,10 @@ const Home: NextPage = () => {
               </div>
             </div>
           </div>
+          <br />
+          <br />
+          <br />
+          <br />
         </div>
       </main>
     </>
