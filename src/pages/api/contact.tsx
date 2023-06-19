@@ -19,6 +19,39 @@ const limiter = rateLimit({
 });
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  const email = req.body.email;
+  const name = req.body.name;
+  const subject = req.body.subject;
+  const content = req.body.content;
+
+  if (name.length >= "51")
+    return res.status(400).json({
+      success: false,
+      message: "Email text exceeds max length.",
+      status: 400,
+    });
+
+  if (name.length >= "51")
+    return res.status(400).json({
+      success: false,
+      message: "Name text exceeds max length.",
+      status: 400,
+    });
+
+  if (subject.length >= "76")
+    return res.status(400).json({
+      success: false,
+      message: "Subject text exceeds max length.",
+      status: 400,
+    });
+
+  if (content.length >= "1501")
+    return res.status(400).json({
+      success: false,
+      message: "Content body exceeds max length.",
+      status: 400,
+    });
+
   limiter(req, res, (err: any) => {
     if (err) {
       return res.status(429).json({
@@ -28,13 +61,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       });
     }
 
-    const email = req.body.email;
-    const name = req.body.name;
-    const subject = req.body.subject;
-    const content = req.body.content;
-
-    const webhookUrl =
-      "https://discord.com/api/webhooks/1118315502125715579/WTfglNaOHHZDfF1veWWRnuij8HVVBJC8k-QS-7QSJroAZpQgewgZuh3gOAwPNYLwH5In";
+    const webhookUrl = process.env.DISCORD_WEBHOOK_URL as string;
     const message = {
       content: `Email: **${email}** - Name: **${name}**\nSubject: \`${subject}\`\n\`------------------------\`\n\n${content}`,
     };

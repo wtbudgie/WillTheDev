@@ -3,20 +3,29 @@ import { FaDiscord, FaGithub, FaMailBulk } from "react-icons/fa";
 import Head from "next/head";
 import { TailwindCss, Nodejs } from "@styled-icons/boxicons-logos";
 import { Nextdotjs, Typescript, Mongodb } from "@styled-icons/simple-icons";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { ChangeEvent, useEffect, useState } from "react";
+import axios, { AxiosError } from "axios";
 
 const Home: NextPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
-  const [showErrorNotification, setShowErrorNotification] = useState(false);
+  const [showRTErrorNotification, setShowRTErrorNotification] = useState(false);
+  const [showBRErrorNotification, setShowBRErrorNotification] = useState(false);
+
+  const maxLength = 1500;
+  const [text, setText] = useState("");
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
-    if (showNotification || showErrorNotification) {
+    if (
+      showNotification ||
+      showRTErrorNotification ||
+      showBRErrorNotification
+    ) {
       timer = setTimeout(() => {
         setShowNotification(false);
-        setShowErrorNotification(false);
+        setShowRTErrorNotification(false);
+        setShowBRErrorNotification(false);
       }, 6000);
     }
     return () => clearTimeout(timer);
@@ -131,7 +140,7 @@ const Home: NextPage = () => {
               Successfully sent the contact request!
             </div>
           )}
-          {showErrorNotification && (
+          {showRTErrorNotification && (
             <div
               className="fixed bottom-4 right-4 mb-3 inline-flex items-center rounded-lg bg-red-500 px-6 py-5 text-base text-white"
               role="alert"
@@ -151,6 +160,28 @@ const Home: NextPage = () => {
                 </svg>
               </span>
               Too many contact requests have been sent. Try again later.
+            </div>
+          )}
+          {showBRErrorNotification && (
+            <div
+              className="fixed bottom-4 right-4 mb-3 inline-flex items-center rounded-lg bg-red-500 px-6 py-5 text-base text-white"
+              role="alert"
+            >
+              <span className="mr-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="h-5 w-5"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </span>
+              An error has occured, try again later.
             </div>
           )}
 
@@ -284,17 +315,17 @@ const Home: NextPage = () => {
                         content,
                       })
                       .then((response) => {
-                        if (response.status == 429) {
+                        setIsOpen(false);
+                        setShowNotification(true);
+                      })
+                      .catch((error: AxiosError) => {
+                        if (error.status == 429) {
                           setIsOpen(false);
-                          setShowErrorNotification(true);
+                          setShowRTErrorNotification(true);
                         } else {
                           setIsOpen(false);
-                          setShowNotification(true);
+                          setShowBRErrorNotification(true);
                         }
-                      })
-                      .catch((error) => {
-                        setIsOpen(false);
-                        setShowErrorNotification(true);
                       });
                   }}
                 >
@@ -311,6 +342,7 @@ const Home: NextPage = () => {
                       id="email"
                       className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400"
                       placeholder="name@company.com"
+                      maxLength={50}
                       required
                     />
                   </div>
@@ -327,6 +359,7 @@ const Home: NextPage = () => {
                       id="name"
                       placeholder="Will"
                       className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400"
+                      maxLength={50}
                       required
                     />
                   </div>
@@ -343,6 +376,7 @@ const Home: NextPage = () => {
                       id="subject"
                       placeholder="Paid commission request."
                       className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400"
+                      maxLength={75}
                       required
                     />
                   </div>
@@ -353,14 +387,38 @@ const Home: NextPage = () => {
                     >
                       Email Content
                     </label>
-                    <input
-                      type="text"
+                    <textarea
                       name="content"
                       id="content"
                       placeholder="..."
                       className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400"
                       required
+                      maxLength={maxLength}
+                      onChange={(event: ChangeEvent<HTMLTextAreaElement>) => {
+                        const inputText = event.target.value;
+                        if (inputText.length <= maxLength) {
+                          setText(inputText);
+                        }
+                      }}
                     />
+                    <div
+                      style={{
+                        marginTop: "5px",
+                        marginLeft: "auto",
+                        marginRight: 0,
+                      }}
+                    >
+                      <label
+                        style={{
+                          color: "white",
+                          marginLeft: "auto",
+                          marginRight: "15px",
+                          float: "right",
+                        }}
+                      >
+                        {text.length}/{maxLength} Characters
+                      </label>
+                    </div>
                   </div>
 
                   <button
