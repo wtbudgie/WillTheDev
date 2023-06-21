@@ -24,31 +24,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const subject = req.body.subject;
   const content = req.body.content;
 
-  if (name.length >= "51")
-    return res.status(400).json({
+  
+  const msg = `Email: **${email}** - Name: **${name}**\nSubject: \`${subject}\`\n\`------------------------\`\n\n${content}`
+  if (msg.length > 2000) return res.status(400).json({
       success: false,
-      message: "Email text exceeds max length.",
-      status: 400,
-    });
-
-  if (name.length >= "51")
-    return res.status(400).json({
-      success: false,
-      message: "Name text exceeds max length.",
-      status: 400,
-    });
-
-  if (subject.length >= "76")
-    return res.status(400).json({
-      success: false,
-      message: "Subject text exceeds max length.",
-      status: 400,
-    });
-
-  if (content.length >= "1501")
-    return res.status(400).json({
-      success: false,
-      message: "Content body exceeds max length.",
+      message: "Message exceeds max length.",
       status: 400,
     });
 
