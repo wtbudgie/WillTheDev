@@ -24,7 +24,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const subject = req.body.subject;
   const content = req.body.content;
 
-  if (name.length >= "51")
+  if (email.length >= "51")
     return res.status(400).json({
       success: false,
       message: "Email text exceeds max length.",
